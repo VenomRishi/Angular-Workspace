@@ -31,7 +31,6 @@ export class TestComponent implements OnInit {
   };
   color = 'red';
   hey = 'property';
-  doSomething: string;
 
   constructor() { }
 
