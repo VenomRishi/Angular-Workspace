@@ -1,0 +1,22 @@
+header {
+  background: #e6b8d2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+header button {
+  background: #dcdceb;
+}
+
+header button:hover {
+  background-color: red;
+}
+
+div {
+  background: #e6b8d2;
+}
+/*# sourceMappingURL=style.css.map */
