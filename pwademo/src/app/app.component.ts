@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
-import { DataService } from './data.service';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -8,23 +7,34 @@ import { DataService } from './data.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'pwademo';
 
-  email: any;
+  title = 'pwademo';
+  hello;
+  list;
+  value;
   constructor(
-    private updates: SwUpdate,
-    private data: DataService
+    private http: HttpClient
   ) {
-    updates.available.subscribe(event => {
-      updates.activateUpdate().then(() => document.location.reload());
-    });
   }
-  ngOnInit() {
-    this.data.getUser().subscribe(
-      res => {
-        console.log(res);
-        this.email = res;
-      }
+  ngOnInit(): void {
+    // {responseType: 'text'} because response is not coming in json format it returning just hello world
+    this.http.get('http://localhost:8080/hello', { responseType: 'text' }).subscribe(result => {
+      this.hello = result;
+
+    }, err => console.log(err));
+    this.getList();
+
+  }
+
+  add() {
+    this.http.post('http://localhost:8080/add', null, {
+      params: new HttpParams().append('val', this.value)
+    }).subscribe(res => {
+      this.getList();
+    }, err => console.log(err)
     );
+  }
+  getList() {
+    this.http.get('http://localhost:8080/get').subscribe(result => this.list = result, err => console.log(err));
   }
 }

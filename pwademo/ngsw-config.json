@@ -12,9 +12,11 @@
           "/manifest.webmanifest",
           "/*.css",
           "/*.js"
-        ]
+        ],
+        "urls": []
       }
-    }, {
+    },
+    {
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
@@ -23,6 +25,20 @@
           "/assets/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "posts",
+      "urls": [
+        "http://localhost:8080/"
+      ],
+      "cacheConfig": {
+        "maxSize": 5,
+        "maxAge": "1d",
+        "timeout": "10s",
+        "strategy": "freshness"
       }
     }
   ]
